@@ -1,19 +1,12 @@
 import React from 'react';
+import Directory from '../../components/directory/directory';
+
 import './Homepage.scss';
 
-const HomePage = () =>(
-        <div className='homePage'>
-            <div className='directory-menu'>
-                <div className='menu-item'>
-                    <div className='content'>
-                        <h1 className='title'>Hats</h1>
-                        <span className='subtitle'>Shop Now</span>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
+const HomePage = () => (
+  <div className='homepage'>
+    <Directory />
+  </div>
 );
 
 export default HomePage;
