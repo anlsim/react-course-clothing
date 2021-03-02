@@ -8,7 +8,7 @@ import {auth} from '../../firebase/firebase.utils';
 import CartIcon from '../cart-icon/cart-icon';
 import CartDropDown from '../cart-dropdown/cart-dropdown';
 
-const Header = ({currentUser}) => (
+const Header = ({currentUser, hidden}) => (
     <div className='header'>
     <Link className='logo-container' to='/'>
       <Logo className='logo' />
@@ -30,14 +30,19 @@ const Header = ({currentUser}) => (
         </Link>
       )}
       <CartIcon />
-      <CartDropDown/>
+      {
+          hidden ? null :
+           <CartDropDown/>
+      }
+      
     </div>
     
   </div>
 );
-const mapStateToProps = state => (
+const mapStateToProps = ({user: {currentUser}, cart: {hidden}}) => (
     {
-        currentUser: state.user.currentUser
+        currentUser,
+        hidden
     }
 )
 
