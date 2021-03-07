@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {createStructuredSelector} from 'reselect';
 import CartItem from '../../components/cart-item/cart-item';
 import { selectCartItems, selectCartTotal} from '../../redux/cart/cart.selectors';
+import {toggleCartHidden} from '../../redux/cart/cart.actions';
 
 
 import './checkout.scss';
