@@ -3,6 +3,8 @@ import React from 'react';
 import {Route, Switch, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 
+import { createStructuredSelector } from 'reselect';
+
 
 import './App.css';
 
@@ -14,6 +16,8 @@ import Checkout from './pages/checkout/checkout';
 import {addCollectionAndDocuments, auth, createUserProfileDocument} from './firebase/firebase.utils';
 import {selectCollectionsForPreview} from './redux/shop/shop.selector';
 import {setCurrentUser} from './redux/user/user.actions';
+
+import { selectCurrentUser } from './redux/user/user.selectors';
 
 
 class App extends React.Component {
@@ -34,10 +38,11 @@ class App extends React.Component {
            
         });
      }
-     else{
+    
        setCurrentUser(userAuth);
-      //  addCollectionAndDocuments('collections', collectionsArray.map(({title, items}) => ({title, items})))
-     }
+       //addCollectionAndDocuments('collections', collectionsArray );
+       addCollectionAndDocuments('collections', collectionsArray.map(({title, items}) => ({title, items})))
+    
     });
   }
   componentWillUnmount(){
@@ -60,10 +65,10 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = ({user}) => ({
-  currentUser: user.currentUser,
-  collectionsArray: selectCollectionsForPreview
-})
+const mapStateToProps = state => ({
+    currentUser: state.user.currentUser, 
+     collectionsArray: selectCollectionsForPreview(state)
+    });
 
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
